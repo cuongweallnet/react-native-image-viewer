@@ -566,7 +566,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               {this.props.failImageSource &&
                 this!.props!.renderImage!({
                   source: {
-                    uri: this.props.failImageSource.url
+                    uri: image.url
                   },
                   style: {
                     width: this.props.failImageSource.width,
