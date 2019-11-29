@@ -53,7 +53,7 @@ export default class ImageViewer extends React.Component<Props, State> {
   }
 
   public UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    if(nextProps.imageUrls.length !== this.props.imageUrls.length) {
+    if(nextProps.imageUrls && this.props.imageUrls && nextProps.imageUrls.length !== this.props.imageUrls.length) {
       this.init(nextProps)
     }
   }
