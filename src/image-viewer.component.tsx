@@ -558,6 +558,8 @@ export default class ImageViewer extends React.Component<Props, State> {
             </ImageZoom>
           );
         case 'fail':
+          const imageWidth = this.props.failImageSource ? this.props.failImageSource.width : screenWidth
+          const imageHeight = this.props.failImageSource ? this.props.failImageSource.height : screenHeight
           return (
             <ImageZoom
               key={index}
@@ -571,8 +573,8 @@ export default class ImageViewer extends React.Component<Props, State> {
               onLongPress={this.handleLongPressWithIndex.get(index)}
               onClick={this.handleClick}
               onDoubleClick={this.handleDoubleClick}
-              imageWidth={this.props.failImageSource ? this.props.failImageSource.width : screenWidth}
-              imageHeight={this.props.failImageSource ? this.props.failImageSource.height : screenHeight}
+              imageWidth={imageWidth ? imageWidth : 400}
+              imageHeight={imageHeight ? imageHeight : 400}
               enableSwipeDown={this.props.enableSwipeDown}
               swipeDownThreshold={this.props.swipeDownThreshold}
               onSwipeDown={this.handleSwipeDown}
@@ -589,8 +591,8 @@ export default class ImageViewer extends React.Component<Props, State> {
                     uri: image.url
                   },
                   style: {
-                    width: this.props.failImageSource.width,
-                    height: this.props.failImageSource.height
+                    width: imageWidth,
+                    height: imageHeight
                   }
                 })}
             </ImageZoom>
