@@ -559,11 +559,29 @@ export default class ImageViewer extends React.Component<Props, State> {
           );
         case 'fail':
           return (
-            <Wrapper
+            <ImageZoom
               key={index}
-              style={this.styles.modalContainer}
+              ref={el => (this.imageRefs[index] = el)}
+              cropWidth={this.width}
+              cropHeight={this.height}
+              maxOverflow={this.props.maxOverflow}
+              horizontalOuterRangeOffset={this.handleHorizontalOuterRangeOffset}
+              responderRelease={this.handleResponderRelease}
+              onMove={this.props.onMove}
+              onLongPress={this.handleLongPressWithIndex.get(index)}
+              onClick={this.handleClick}
+              onDoubleClick={this.handleDoubleClick}
               imageWidth={this.props.failImageSource ? this.props.failImageSource.width : screenWidth}
               imageHeight={this.props.failImageSource ? this.props.failImageSource.height : screenHeight}
+              enableSwipeDown={this.props.enableSwipeDown}
+              swipeDownThreshold={this.props.swipeDownThreshold}
+              onSwipeDown={this.handleSwipeDown}
+              panToMove={!this.state.isShowMenu}
+              pinchToZoom={this.props.enableImageZoom && !this.state.isShowMenu}
+              enableDoubleClickZoom={this.props.enableImageZoom && !this.state.isShowMenu}
+              doubleClickInterval={this.props.doubleClickInterval}
+              minScale={this.props.minScale}
+              maxScale={this.props.maxScale}
             >
               {this.props.failImageSource &&
                 this!.props!.renderImage!({
@@ -575,7 +593,7 @@ export default class ImageViewer extends React.Component<Props, State> {
                     height: this.props.failImageSource.height
                   }
                 })}
-            </Wrapper>
+            </ImageZoom>
           );
       }
     });
